@@ -14,6 +14,7 @@
 		C7E46B51280AE79000E7B26E /* FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E46B50280AE79000E7B26E /* FeedLoader.swift */; };
 		C7E46B53280E926600E7B26E /* RemoteFeedLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E46B52280E926600E7B26E /* RemoteFeedLoaderTests.swift */; };
 		C7E46B57280EA27300E7B26E /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E46B56280EA27300E7B26E /* RemoteFeedLoader.swift */; };
+		C7F2686A28100A6700EA1B02 /* URLSessionHTTPCientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F2686928100A6700EA1B02 /* URLSessionHTTPCientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		C7E46B50280AE79000E7B26E /* FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoader.swift; sourceTree = "<group>"; };
 		C7E46B52280E926600E7B26E /* RemoteFeedLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoaderTests.swift; sourceTree = "<group>"; };
 		C7E46B56280EA27300E7B26E /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
+		C7F2686928100A6700EA1B02 /* URLSessionHTTPCientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPCientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				C7E46B52280E926600E7B26E /* RemoteFeedLoaderTests.swift */,
+				C7F2686928100A6700EA1B02 /* URLSessionHTTPCientTests.swift */,
 			);
 			path = "Feed API";
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7F2686A28100A6700EA1B02 /* URLSessionHTTPCientTests.swift in Sources */,
 				C7E46B53280E926600E7B26E /* RemoteFeedLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

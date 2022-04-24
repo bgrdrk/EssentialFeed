@@ -8,12 +8,16 @@ class LocalFeedLoader {
     }
 
     func save() {
-        store.deleteCachedFeedCallCount += 1
+        store.deleteCachedFeed()
     }
 }
 
 class FeedStore {
     var deleteCachedFeedCallCount = 0
+
+    func deleteCachedFeed() {
+        deleteCachedFeedCallCount += 1
+    }
 }
 
 class CacheFeedUseCaseTests: XCTestCase {

@@ -1,4 +1,5 @@
 import XCTest
+import EssentialFeed
 
 class LocalFeedLoader {
     let store: FeedStore
@@ -7,7 +8,7 @@ class LocalFeedLoader {
         self.store = store
     }
 
-    func save() {
+    func save(_ items: [FeedItem]) {
         store.deleteCachedFeed()
     }
 }
@@ -30,8 +31,9 @@ class CacheFeedUseCaseTests: XCTestCase {
 
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
+        let items = [uniqueItem, uniqueItem]
 
-        sut.save()
+        sut.save(items)
 
         XCTAssertEqual(store.deleteCachedFeedCallCount, 1)
     }
@@ -47,5 +49,13 @@ class CacheFeedUseCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
 
         return (sut, store)
+    }
+
+    private var uniqueItem: FeedItem {
+        FeedItem(id: UUID(), description: "description", location: "location", imageURL: anyURL)
+    }
+
+    private var anyURL: URL {
+        URL(string: "https://any-url.com")!
     }
 }

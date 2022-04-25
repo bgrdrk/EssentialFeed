@@ -17,7 +17,7 @@ class LocalFeedLoader {
     }
 
     // we need to notify clients of the save command when error occured and operation stopped
-    // since operations are asynchrounus we can pass a block/closure where..
+    // since operations are asynchronous we can pass a block/closure where..
     // we receive an error if anything went wrong
     func save(_ items: [FeedItem], completion: @escaping (Error?) -> Void) {
         store.deleteCachedFeed() { [unowned self] error in

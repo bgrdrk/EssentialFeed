@@ -2,12 +2,6 @@ import Foundation
 
 public final class LocalFeedLoader {
     let store: FeedStore
-    /*
-     Instructor comment: Safe choice is to inject this current date to LocalFeedLoader
-     and not let the LocalFeedLoader to come up with it's Date. "protocol DateProvider" could be the example.
-     Another option - closure - moving the responsibility to a collaborator (a simple closure in this case)
-     and inject it as a dependency. Then we can easily control the current date/time during tests.
-     */
     let currentDate: () -> Date
     let calendar = Calendar(identifier: .gregorian)
 
@@ -19,9 +13,18 @@ public final class LocalFeedLoader {
         self.currentDate = currentDate
     }
 
-    // we need to notify clients of the save command when error occured and operation stopped
-    // since operations are asynchronous we can pass a block/closure where..
-    // we receive an error if anything went wrong
+    private let maxCacheAgeInDays = 7
+    private func validate(_ timestamp: Date) -> Bool {
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+
+        return currentDate() < maxCacheAge
+    }
+}
+
+extension LocalFeedLoader {
+
     public func save(_ feed: [FeedImage], completion: @escaping (SaveResult) -> Void) {
         store.deleteCachedFeed() { [weak self] error in
             guard let self = self else { return }
@@ -33,6 +36,16 @@ public final class LocalFeedLoader {
             }
         }
     }
+
+    private func cache(_ feed: [FeedImage], with completion: @escaping (SaveResult) -> Void) {
+        store.insert(feed.toLocal, timestamp: currentDate(), completion: { [weak self] error in
+            guard self != nil else { return }
+            completion(error)
+        })
+    }
+}
+
+extension LocalFeedLoader {
 
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
@@ -48,11 +61,14 @@ public final class LocalFeedLoader {
             }
         }
     }
+}
 
+extension LocalFeedLoader {
+    
     public func validateCache() {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case .failure:
                 self.store.deleteCachedFeed { _ in }
@@ -62,22 +78,6 @@ public final class LocalFeedLoader {
                 break
             }
         }
-    }
-
-    private let maxCacheAgeInDays = 7
-    private func validate(_ timestamp: Date) -> Bool {
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-
-        return currentDate() < maxCacheAge
-    }
-
-    private func cache(_ feed: [FeedImage], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(feed.toLocal, timestamp: currentDate(), completion: { [weak self] error in
-            guard self != nil else { return }
-            completion(error)
-        })
     }
 }
 

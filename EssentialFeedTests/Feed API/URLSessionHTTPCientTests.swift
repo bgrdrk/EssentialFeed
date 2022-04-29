@@ -129,16 +129,8 @@ class URLSessionHTTPCientTests: XCTestCase {
 
     // MARK: - Helper variables
 
-    private var anyURL: URL {
-        URL(string: "https://any-url.com")!
-    }
-
     private var anyData: Data {
         Data("any data".utf8)
-    }
-
-    private var anyNSError: NSError {
-        NSError(domain: "any error", code: 0)
     }
 
     private var nonHTTPURLResponse: URLResponse {

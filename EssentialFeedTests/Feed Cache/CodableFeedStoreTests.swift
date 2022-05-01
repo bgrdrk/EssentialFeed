@@ -118,6 +118,27 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut, toRetrieve: .empty)
     }
 
+    func test_storeSideEffects_runSerially() {
+        let sut = makeSUT()
+
+        let op1 = expectation(description: "Operation 1")
+        sut.insert(uniqueImageFeed.local, timestamp: Date()) { _ in
+            op1.fulfill()
+        }
+
+        let op2 = expectation(description: "Operation 2")
+        sut.deleteCachedFeed { _ in
+            op2.fulfill()
+        }
+
+        let op3 = expectation(description: "Operation 3")
+        sut.insert(uniqueImageFeed.local, timestamp: Date()) { _ in
+            op3.fulfill()
+        }
+
+        wait(for: [op1, op2, op3], timeout: 1, enforceOrder: true)
+    }
+
     // - MARK: Helpers
 
     private func makeSUT(storeURL: URL? = nil,

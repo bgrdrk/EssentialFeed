@@ -16,6 +16,10 @@ public final class LocalFeedLoader {
         self.store = store
         self.currentDate = currentDate
     }
+    
+    public func load() {
+        store.retrieve()
+    }
 
     // we need to notify clients of the save command when error occured and operation stopped
     // since operations are asynchronous we can pass a block/closure where..

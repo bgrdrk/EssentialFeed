@@ -18,6 +18,41 @@ public final class LocalFeedLoader {
         self.currentDate = currentDate
     }
     
+    private let maxCacheAgeInDays = 7
+    private func validate(_ timestamp: Date) -> Bool {
+        let calendar = Calendar(identifier: .gregorian)
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+        return currentDate() < maxCacheAge
+    }
+}
+
+extension LocalFeedLoader {
+    // we need to notify clients of the save command when error occured and operation stopped
+    // since operations are asynchronous we can pass a block/closure where..
+    // we receive an error if anything went wrong
+    public func save(_ feed: [FeedImage], completion: @escaping (SaveResult) -> Void) {
+        store.deleteCachedFeed() { [weak self] error in
+            guard let self else { return }
+
+            if let cacheDeletionError = error {
+                completion(cacheDeletionError)
+            } else {
+                self.cache(feed, with: completion)
+            }
+        }
+    }
+    
+    private func cache(_ feed: [FeedImage], with completion: @escaping (SaveResult) -> Void) {
+        store.insert(feed.toLocal, timestamp: currentDate(), completion: { [weak self] error in
+            guard self != nil else { return }
+            completion(error)
+        })
+    }
+}
+
+extension LocalFeedLoader {
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self else { return }
@@ -36,7 +71,9 @@ public final class LocalFeedLoader {
             }
         }
     }
-    
+}
+
+extension LocalFeedLoader {
     public func validateCache() {
         store.retrieve { [weak self] result in
             guard let self else { return }
@@ -52,37 +89,6 @@ public final class LocalFeedLoader {
                 break
             }
         }
-    }
-    
-    private let maxCacheAgeInDays = 7
-    private func validate(_ timestamp: Date) -> Bool {
-        let calendar = Calendar(identifier: .gregorian)
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-        return currentDate() < maxCacheAge
-    }
-
-    // we need to notify clients of the save command when error occured and operation stopped
-    // since operations are asynchronous we can pass a block/closure where..
-    // we receive an error if anything went wrong
-    public func save(_ feed: [FeedImage], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCachedFeed() { [weak self] error in
-            guard let self = self else { return }
-
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
-                self.cache(feed, with: completion)
-            }
-        }
-    }
-
-    private func cache(_ feed: [FeedImage], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(feed.toLocal, timestamp: currentDate(), completion: { [weak self] error in
-            guard self != nil else { return }
-            completion(error)
-        })
     }
 }
 

@@ -19,16 +19,29 @@ public final class LocalFeedLoader {
     }
     
     public func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve { result in
+        store.retrieve { [unowned self] result in
             switch result {
             case .empty:
                 completion(.success([]))
-            case .found(let feed, _):
-                completion(.success(feed.toModels))
+            case .found(let feed, let timestamp):
+                if self.validate(timestamp) {
+                    completion(.success(feed.toModels))
+                } else {
+                    completion(.success([]))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }
         }
+    }
+    
+    private let maxCacheAgeInDays = 7
+    private func validate(_ timestamp: Date) -> Bool {
+        let calendar = Calendar(identifier: .gregorian)
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+        return currentDate() < maxCacheAge
     }
 
     // we need to notify clients of the save command when error occured and operation stopped

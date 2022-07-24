@@ -9,16 +9,13 @@ public final class LocalFeedLoader {
      and inject it as a dependency. Then we can easily control the current date/time during tests.
      */
     let currentDate: () -> Date
-
-    public typealias SaveResult = Error?
-    public typealias LoadResult = LoadFeedResult
+    private let maxCacheAgeInDays = 7
 
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
     }
     
-    private let maxCacheAgeInDays = 7
     private func validate(_ timestamp: Date) -> Bool {
         let calendar = Calendar(identifier: .gregorian)
         guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
@@ -29,6 +26,7 @@ public final class LocalFeedLoader {
 }
 
 extension LocalFeedLoader {
+    public typealias SaveResult = Error?
     // we need to notify clients of the save command when error occured and operation stopped
     // since operations are asynchronous we can pass a block/closure where..
     // we receive an error if anything went wrong
@@ -53,6 +51,8 @@ extension LocalFeedLoader {
 }
 
 extension LocalFeedLoader: FeedLoader {
+    public typealias LoadResult = LoadFeedResult
+    
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self else { return }

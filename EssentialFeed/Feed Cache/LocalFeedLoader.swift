@@ -1,5 +1,22 @@
 import Foundation
 
+private final class FeedCachePolicy {
+    private let currentDate: () -> Date
+    private let maxCacheAgeInDays = 7
+    
+    init(currentDate: @escaping () -> Date) {
+        self.currentDate = currentDate
+    }
+    
+    func validate(_ timestamp: Date) -> Bool {
+        let calendar = Calendar(identifier: .gregorian)
+        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
+            return false
+        }
+        return currentDate() < maxCacheAge
+    }
+}
+
 public final class LocalFeedLoader {
     let store: FeedStore
     /*
@@ -9,19 +26,12 @@ public final class LocalFeedLoader {
      and inject it as a dependency. Then we can easily control the current date/time during tests.
      */
     let currentDate: () -> Date
-    private let maxCacheAgeInDays = 7
+    private let cachePolicy: FeedCachePolicy
 
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
-    }
-    
-    private func validate(_ timestamp: Date) -> Bool {
-        let calendar = Calendar(identifier: .gregorian)
-        guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
-            return false
-        }
-        return currentDate() < maxCacheAge
+        self.cachePolicy = FeedCachePolicy(currentDate: currentDate)
     }
 }
 
@@ -61,7 +71,7 @@ extension LocalFeedLoader: FeedLoader {
             case .empty:
                 completion(.success([]))
             case .found(let feed, let timestamp):
-                if self.validate(timestamp) {
+                if self.cachePolicy.validate(timestamp) {
                     completion(.success(feed.toModels))
                 } else {
                     completion(.success([]))
@@ -82,7 +92,7 @@ extension LocalFeedLoader {
             case .failure:
                 self.store.deleteCachedFeed { _ in }
             case .found(_, let timestamp):
-                if !self.validate(timestamp) {
+                if !self.cachePolicy.validate(timestamp) {
                     self.store.deleteCachedFeed { _ in }
                 }
             case .empty:

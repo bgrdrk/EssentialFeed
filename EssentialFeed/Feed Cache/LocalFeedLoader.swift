@@ -1,10 +1,11 @@
 import Foundation
 
 private final class FeedCachePolicy {
-    private let maxCacheAgeInDays = 7
+    private init() {}
+    private static let calendar = Calendar(identifier: .gregorian)
+    private static let maxCacheAgeInDays = 7
     
-    func validate(_ timestamp: Date, against date: Date) -> Bool {
-        let calendar = Calendar(identifier: .gregorian)
+    static func validate(_ timestamp: Date, against date: Date) -> Bool {
         guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
         }
@@ -21,7 +22,6 @@ public final class LocalFeedLoader {
      and inject it as a dependency. Then we can easily control the current date/time during tests.
      */
     let currentDate: () -> Date
-    private let cachePolicy = FeedCachePolicy()
 
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         self.store = store
@@ -65,7 +65,7 @@ extension LocalFeedLoader: FeedLoader {
             case .empty:
                 completion(.success([]))
             case .found(let feed, let timestamp):
-                if self.cachePolicy.validate(timestamp, against: self.currentDate()) {
+                if FeedCachePolicy.validate(timestamp, against: self.currentDate()) {
                     completion(.success(feed.toModels))
                 } else {
                     completion(.success([]))
@@ -86,7 +86,7 @@ extension LocalFeedLoader {
             case .failure:
                 self.store.deleteCachedFeed { _ in }
             case .found(_, let timestamp):
-                if !self.cachePolicy.validate(timestamp, against: self.currentDate()) {
+                if !FeedCachePolicy.validate(timestamp, against: self.currentDate()) {
                     self.store.deleteCachedFeed { _ in }
                 }
             case .empty:

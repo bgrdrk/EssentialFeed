@@ -1,19 +1,14 @@
 import Foundation
 
 private final class FeedCachePolicy {
-    private let currentDate: () -> Date
     private let maxCacheAgeInDays = 7
     
-    init(currentDate: @escaping () -> Date) {
-        self.currentDate = currentDate
-    }
-    
-    func validate(_ timestamp: Date) -> Bool {
+    func validate(_ timestamp: Date, against date: Date) -> Bool {
         let calendar = Calendar(identifier: .gregorian)
         guard let maxCacheAge = calendar.date(byAdding: .day, value: maxCacheAgeInDays, to: timestamp) else {
             return false
         }
-        return currentDate() < maxCacheAge
+        return date < maxCacheAge
     }
 }
 
@@ -26,12 +21,11 @@ public final class LocalFeedLoader {
      and inject it as a dependency. Then we can easily control the current date/time during tests.
      */
     let currentDate: () -> Date
-    private let cachePolicy: FeedCachePolicy
+    private let cachePolicy = FeedCachePolicy()
 
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         self.store = store
         self.currentDate = currentDate
-        self.cachePolicy = FeedCachePolicy(currentDate: currentDate)
     }
 }
 
@@ -71,7 +65,7 @@ extension LocalFeedLoader: FeedLoader {
             case .empty:
                 completion(.success([]))
             case .found(let feed, let timestamp):
-                if self.cachePolicy.validate(timestamp) {
+                if self.cachePolicy.validate(timestamp, against: self.currentDate()) {
                     completion(.success(feed.toModels))
                 } else {
                     completion(.success([]))
@@ -92,7 +86,7 @@ extension LocalFeedLoader {
             case .failure:
                 self.store.deleteCachedFeed { _ in }
             case .found(_, let timestamp):
-                if !self.cachePolicy.validate(timestamp) {
+                if !self.cachePolicy.validate(timestamp, against: self.currentDate()) {
                     self.store.deleteCachedFeed { _ in }
                 }
             case .empty:

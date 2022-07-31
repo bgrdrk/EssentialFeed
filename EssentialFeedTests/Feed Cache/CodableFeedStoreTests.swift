@@ -26,7 +26,7 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
         
         assertThatRetrieveHasNoSideEffectsOnEmptyCache(on: sut)
     }
-    
+
     func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
         let sut = makeSUT()
 
@@ -38,7 +38,7 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
         
         assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(on: sut)
     }
-    
+
     func test_retrieve_deliversFailureOnRetrievalError() {
         let storeURL = testSpecificStoreURL
         let sut = makeSUT(storeURL: storeURL)
@@ -47,7 +47,7 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
 
         assertThatRetrieveDeliversFailureOnRetrievalError(on: sut)
     }
-    
+
     func test_retrieve_hasNoSideEffectsOnFailure() {
         let storeURL = testSpecificStoreURL
         let sut = makeSUT(storeURL: storeURL)
@@ -56,7 +56,7 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
 
         assertThatRetrieveHasNoSideEffectsOnFailure(on: sut)
     }
-    
+
     func test_insert_deliversNoErrorOnEmptyCache() {
         let sut = makeSUT()
 
@@ -88,7 +88,7 @@ class CodableFeedStoreTests: XCTestCase, FailableFeedStoreSpecs {
         
         assertThatInsertHasNoSideEffectsOnInsertionError(on: sut)
     }
-    
+
     func test_delete_deliversNoErrorOnEmptyCache() {
         let sut = makeSUT()
 

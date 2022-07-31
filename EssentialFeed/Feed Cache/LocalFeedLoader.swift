@@ -1,6 +1,7 @@
 import Foundation
 
 public final class LocalFeedLoader {
+
     let store: FeedStore
     /*
      Instructor comment: Safe choice is to inject this current date to LocalFeedLoader
@@ -21,6 +22,7 @@ extension LocalFeedLoader {
     // we need to notify clients of the save command when error occured and operation stopped
     // since operations are asynchronous we can pass a block/closure where..
     // we receive an error if anything went wrong
+
     public func save(_ feed: [FeedImage], completion: @escaping (SaveResult) -> Void) {
         store.deleteCachedFeed() { [weak self] error in
             guard let self else { return }

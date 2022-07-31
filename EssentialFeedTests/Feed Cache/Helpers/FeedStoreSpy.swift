@@ -17,7 +17,7 @@ final class FeedStoreSpy: FeedStore {
         retrievalCompletions.append(completion)
         receivedMessages.append(.retrieve)
     }
-    
+
     func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         deletionCompletions.append(completion)
         receivedMessages.append(.deleteCachedFeed)

@@ -1,15 +1,15 @@
 import Foundation
 
-public class CodableFeedStore: FeedStore {
+final public class CodableFeedStore: FeedStore {
     private struct Cache: Codable {
         let feed: [CodableFeedImage]
         let timestamp: Date
-
+        
         var localFeed: [LocalFeedImage] {
-            feed.map { $0.local }
+            return feed.map { $0.local }
         }
     }
-
+    
     private struct CodableFeedImage: Codable {
         private let id: UUID
         private let description: String?
@@ -22,31 +22,27 @@ public class CodableFeedStore: FeedStore {
             location = image.location
             url = image.url
         }
-
+        
         var local: LocalFeedImage {
-            .init(id: id, description: description, location: location, url: url)
+            return LocalFeedImage(id: id, description: description, location: location, url: url)
         }
     }
-
-    private let queue = DispatchQueue(
-        label: "\(CodableFeedStore.self)Queue",
-        qos: .userInitiated,
-        attributes: .concurrent
-    )
+    
+    private let queue = DispatchQueue(label: "\(CodableFeedStore.self)Queue", qos: .userInitiated, attributes: .concurrent)
 
     private let storeURL: URL
 
     public init(storeURL: URL) {
         self.storeURL = storeURL
     }
-
+    
     public func retrieve(completion: @escaping RetrievalCompletion) {
         let storeURL = self.storeURL
         queue.async {
             guard let data = try? Data(contentsOf: storeURL) else {
                 return completion(.empty)
             }
-
+            
             do {
                 let decoder = JSONDecoder()
                 let cache = try decoder.decode(Cache.self, from: data)

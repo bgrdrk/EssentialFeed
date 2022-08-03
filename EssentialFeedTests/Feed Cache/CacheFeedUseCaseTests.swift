@@ -114,9 +114,9 @@ class CacheFeedUseCaseTests: XCTestCase {
                         line: UInt = #line) {
         let exp = expectation(description: "Wait for save completion")
 
-        var receivedError: LocalFeedLoader.SaveResult!
-        sut.save(uniqueImageFeed.models) { error in
-            receivedError = error
+        var receivedError: Error?
+        sut.save(uniqueImageFeed.models) { result in
+            if case Result.failure(let error) = result { receivedError = error }
             exp.fulfill()
         }
 

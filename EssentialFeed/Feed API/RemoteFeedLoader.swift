@@ -9,7 +9,7 @@ public final class RemoteFeedLoader: FeedLoader {
         case invalidData
     }
 
-    public typealias Result = LoadFeedResult
+    public typealias Result = FeedLoader.Result
 
     public init(client: HTTPClient, url: URL) {
         self.client = client
@@ -21,8 +21,8 @@ public final class RemoteFeedLoader: FeedLoader {
             guard self != nil else { return }
             
             switch result {
-            case .success(let data, let response):
-                completion(RemoteFeedLoader.map(data, from: response))
+            case .success(let result):
+                completion(RemoteFeedLoader.map(result.0, from: result.1))
             case .failure:
                 completion(.failure(Error.connectivity))
             }

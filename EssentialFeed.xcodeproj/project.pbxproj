@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C70163F0289D60D600668123 /* FeedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70163EF289D60D600668123 /* FeedViewControllerTests.swift */; };
+		C70163F2289D635A00668123 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7E46B35280AE52A00E7B26E /* EssentialFeed.framework */; };
+		C70163F3289D635A00668123 /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7E46B35280AE52A00E7B26E /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7387884280EE87600327C38 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7387883280EE87600327C38 /* HTTPClient.swift */; };
 		C7387886280EE89900327C38 /* FeedItemsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7387885280EE89900327C38 /* FeedItemsMapper.swift */; };
 		C73A4BC028167A4900F07DF0 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4BBF28167A4900F07DF0 /* LocalFeedLoader.swift */; };
@@ -54,6 +56,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C70163F4289D635A00668123 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7E46B2C280AE52A00E7B26E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7E46B34280AE52A00E7B26E;
+			remoteInfo = EssentialFeed;
+		};
 		C74EE068289BF35C0056F416 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C7E46B2C280AE52A00E7B26E /* Project object */;
@@ -83,6 +92,20 @@
 			remoteInfo = EssentialFeed;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C70163F6289D635A00668123 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C70163F3289D635A00668123 /* EssentialFeed.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C70163EF289D60D600668123 /* FeedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerTests.swift; sourceTree = "<group>"; };
@@ -134,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C70163F2289D635A00668123 /* EssentialFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +203,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C70163F1289D635A00668123 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C7387887280EF35D00327C38 /* Feed API */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +328,7 @@
 				C74EE060289BF35C0056F416 /* EssentialFeediOS */,
 				C74EE06A289BF35C0056F416 /* EssentialFeediOSTests */,
 				C7E46B36280AE52A00E7B26E /* Products */,
+				C70163F1289D635A00668123 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -399,10 +431,12 @@
 				C74EE05B289BF35C0056F416 /* Sources */,
 				C74EE05C289BF35C0056F416 /* Frameworks */,
 				C74EE05D289BF35C0056F416 /* Resources */,
+				C70163F6289D635A00668123 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C70163F5289D635A00668123 /* PBXTargetDependency */,
 			);
 			name = EssentialFeediOS;
 			productName = EssentialFeediOS;
@@ -685,6 +719,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C70163F5289D635A00668123 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7E46B34280AE52A00E7B26E /* EssentialFeed */;
+			targetProxy = C70163F4289D635A00668123 /* PBXContainerItemProxy */;
+		};
 		C74EE069289BF35C0056F416 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C74EE05E289BF35C0056F416 /* EssentialFeediOS */;

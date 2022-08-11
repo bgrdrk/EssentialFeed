@@ -6,8 +6,8 @@ final class FeedRefreshViewController: NSObject {
 
     private let viewModel: FeedViewModel
 
-    init(feedLoader: FeedLoader) {
-        self.viewModel = FeedViewModel(feedLoader: feedLoader)
+    init(viewModel: FeedViewModel) {
+        self.viewModel = viewModel
     }
 
     var onRefresh: (([FeedImage]) -> Void)?

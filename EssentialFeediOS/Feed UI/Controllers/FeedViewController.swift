@@ -1,5 +1,4 @@
 import UIKit
-import EssentialFeed
 
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     // TODO why var, why optional?

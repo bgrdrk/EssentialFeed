@@ -1,3 +1,4 @@
+import Foundation
 import EssentialFeed
 
 protocol FeedView {
@@ -15,6 +16,15 @@ final class FeedPresenter {
     init(feedView: FeedView, loadingView: FeedLoadingView) {
         self.feedView = feedView
         self.loadingView = loadingView
+    }
+    
+    static var title: String {
+        NSLocalizedString(
+            "FEED_VIEW_TITLE",
+            tableName: "Feed",
+            bundle: Bundle(for: FeedPresenter.self),
+            comment: "Title for the feed view"
+        )
     }
     
     func didStartLoadingFeed() {

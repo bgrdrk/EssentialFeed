@@ -8,7 +8,7 @@ protocol FeedViewControllerDelegate {
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
     var delegate: FeedViewControllerDelegate?
-    @IBOutlet private(set) public var errorView: ErrorView?
+    @IBOutlet private(set) public weak var errorView: ErrorView?
     
     var tableModel = [FeedImageCellController]() {
         didSet { tableView.reloadData() }

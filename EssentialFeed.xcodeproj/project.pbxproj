@@ -382,13 +382,11 @@
 		C751523928A23A6B00B5279A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C7F3A4E828CB0F660068E877 /* Helpers */,
 				C766DFAB28C876F000053F06 /* ErrorView.swift */,
 				C7C5E4BE28A6E57B00844ADB /* Feed.storyboard */,
 				C7C5E4C028A6E5E400844ADB /* Feed.xcassets */,
 				C757AC4728A0FEC8006B470A /* FeedImageCell.swift */,
-				C7C5E4C428A6FA2800844ADB /* UIImageView+Animations.swift */,
-				C7C5E4C228A6F90900844ADB /* UITableView+Dequeueing.swift */,
-				C751522A28A1779A00B5279A /* UIView+Shimmering.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -581,6 +579,16 @@
 				C7F2687628104D2500EA1B02 /* EssentialFeedAPIEndToEndTests.swift */,
 			);
 			path = EssentialFeedAPIEndToEndTests;
+			sourceTree = "<group>";
+		};
+		C7F3A4E828CB0F660068E877 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C7C5E4C428A6FA2800844ADB /* UIImageView+Animations.swift */,
+				C7C5E4C228A6F90900844ADB /* UITableView+Dequeueing.swift */,
+				C751522A28A1779A00B5279A /* UIView+Shimmering.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

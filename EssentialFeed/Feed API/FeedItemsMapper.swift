@@ -5,12 +5,9 @@ final class FeedItemsMapper {
         let items: [RemoteFeedItem]
     }
 
-    private static let OK_200 = 200
-
     static func map(_ data: Data, from response: HTTPURLResponse) throws -> [RemoteFeedItem] {
-        guard response.statusCode == OK_200,
-              let root = root(from: data) else {
-                  throw RemoteFeedLoader.Error.invalidData
+        guard response.isOK, let root = root(from: data) else {
+            throw RemoteFeedLoader.Error.invalidData
         }
 
         return root.items

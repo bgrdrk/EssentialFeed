@@ -7,3 +7,7 @@ var anyURL: URL {
 var anyNSError: NSError {
     NSError(domain: "any error", code: 0)
 }
+
+var anyData: Data {
+    Data("any data".utf8)
+}

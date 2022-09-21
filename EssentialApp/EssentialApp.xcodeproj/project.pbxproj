@@ -17,7 +17,7 @@
 		C72BDE7728DAF6B400B6FEC8 /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C72BDE7428DAF6B400B6FEC8 /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C72BDE7828DAF6B400B6FEC8 /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C72BDE7528DAF6B400B6FEC8 /* EssentialFeediOS.framework */; };
 		C72BDE7928DAF6B400B6FEC8 /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C72BDE7528DAF6B400B6FEC8 /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C72BDE7C28DB0E6E00B6FEC8 /* InitialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72BDE7B28DB0E6E00B6FEC8 /* InitialTests.swift */; };
+		C72BDE7C28DB0E6E00B6FEC8 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72BDE7B28DB0E6E00B6FEC8 /* FeedLoaderWithFallbackCompositeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 		C72BDE5628DAF02500B6FEC8 /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C72BDE7428DAF6B400B6FEC8 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C72BDE7528DAF6B400B6FEC8 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C72BDE7B28DB0E6E00B6FEC8 /* InitialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialTests.swift; sourceTree = "<group>"; };
+		C72BDE7B28DB0E6E00B6FEC8 /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +116,7 @@
 		C72BDE5928DAF02500B6FEC8 /* EssentialAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				C72BDE7B28DB0E6E00B6FEC8 /* InitialTests.swift */,
+				C72BDE7B28DB0E6E00B6FEC8 /* FeedLoaderWithFallbackCompositeTests.swift */,
 			);
 			path = EssentialAppTests;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C72BDE7C28DB0E6E00B6FEC8 /* InitialTests.swift in Sources */,
+				C72BDE7C28DB0E6E00B6FEC8 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

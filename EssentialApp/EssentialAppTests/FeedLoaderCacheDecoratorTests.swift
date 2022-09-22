@@ -16,7 +16,7 @@ final class FeedLoaderCacheDecorator: FeedLoader {
 class FeedLoaderCacheDecoratorTests: XCTestCase {
 
     func test_load_deliversFeedOnLoaderSuccess() {
-        let feed = uniqueFeed()
+        let feed = uniqueFeed
         let loader = FeedLoaderStub(result: .success(feed))
         let sut = FeedLoaderCacheDecorator(decoratee: loader)
 
@@ -51,9 +51,5 @@ class FeedLoaderCacheDecoratorTests: XCTestCase {
         }
 
         wait(for: [exp], timeout: 1.0)
-    }
-
-    private func uniqueFeed() -> [FeedImage] {
-        return [FeedImage(id: UUID(), description: "any", location: "any", url: anyURL)]
     }
 }

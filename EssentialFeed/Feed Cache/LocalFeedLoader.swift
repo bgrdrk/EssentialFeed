@@ -17,8 +17,8 @@ public final class LocalFeedLoader {
     }
 }
 
-extension LocalFeedLoader {
-    public typealias SaveResult = Result<Void, Error>
+extension LocalFeedLoader: FeedCache {
+    public typealias SaveResult = FeedCache.Result
     // we need to notify clients of the save command when error occured and operation stopped
     // since operations are asynchronous we can pass a block/closure where..
     // we receive an error if anything went wrong

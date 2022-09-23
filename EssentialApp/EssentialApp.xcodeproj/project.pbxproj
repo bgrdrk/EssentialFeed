@@ -32,6 +32,7 @@
 		C72FF43928DC4E330058E7F3 /* XCTestCase+FeedImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FF43828DC4E330058E7F3 /* XCTestCase+FeedImageDataLoader.swift */; };
 		C72FF43D28DC4FEF0058E7F3 /* FeedImageDataLoaderCacheDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FF43C28DC4FEF0058E7F3 /* FeedImageDataLoaderCacheDecorator.swift */; };
 		C7BC09CB28DD98D2000C4836 /* EssentialAppUIAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC09CA28DD98D2000C4836 /* EssentialAppUIAcceptanceTests.swift */; };
+		C7BC09D428DDAB0C000C4836 /* DebuggingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BC09D328DDAB0C000C4836 /* DebuggingSceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		C72FF43C28DC4FEF0058E7F3 /* FeedImageDataLoaderCacheDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderCacheDecorator.swift; sourceTree = "<group>"; };
 		C7BC09C828DD98D2000C4836 /* EssentialAppUIAcceptanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppUIAcceptanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7BC09CA28DD98D2000C4836 /* EssentialAppUIAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialAppUIAcceptanceTests.swift; sourceTree = "<group>"; };
+		C7BC09D328DDAB0C000C4836 /* DebuggingSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggingSceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				C72BDE8128DB238D00B6FEC8 /* FeedImageDataLoaderWithFallbackComposite.swift */,
 				C72FF43228DC4B7A0058E7F3 /* FeedLoaderCacheDecorator.swift */,
 				C72BDE7D28DB132700B6FEC8 /* FeedLoaderWithFallbackComposite.swift */,
+				C7BC09D328DDAB0C000C4836 /* DebuggingSceneDelegate.swift */,
 				C72BDE4528DAF02500B6FEC8 /* SceneDelegate.swift */,
 				C72BDE4728DAF02500B6FEC8 /* ViewController.swift */,
 				C72BDE4928DAF02500B6FEC8 /* Main.storyboard */,
@@ -341,6 +344,7 @@
 				C72BDE4428DAF02500B6FEC8 /* AppDelegate.swift in Sources */,
 				C72BDE7E28DB132700B6FEC8 /* FeedLoaderWithFallbackComposite.swift in Sources */,
 				C72FF43328DC4B7A0058E7F3 /* FeedLoaderCacheDecorator.swift in Sources */,
+				C7BC09D428DDAB0C000C4836 /* DebuggingSceneDelegate.swift in Sources */,
 				C72BDE4628DAF02500B6FEC8 /* SceneDelegate.swift in Sources */,
 				C72BDE8228DB238D00B6FEC8 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */,
 				C72FF43D28DC4FEF0058E7F3 /* FeedImageDataLoaderCacheDecorator.swift in Sources */,

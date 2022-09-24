@@ -369,7 +369,6 @@
 		C74EE060289BF35C0056F416 /* EssentialFeediOS */ = {
 			isa = PBXGroup;
 			children = (
-				C751523528A23A0700B5279A /* FeedImageLoader */,
 				C751523B28A23A9B00B5279A /* Feed UI */,
 			);
 			path = EssentialFeediOS;
@@ -397,13 +396,6 @@
 				C751522F28A2393F00B5279A /* UIRefreshControl+TestHelpers.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		C751523528A23A0700B5279A /* FeedImageLoader */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FeedImageLoader;
 			sourceTree = "<group>";
 		};
 		C751523828A23A5C00B5279A /* Controllers */ = {

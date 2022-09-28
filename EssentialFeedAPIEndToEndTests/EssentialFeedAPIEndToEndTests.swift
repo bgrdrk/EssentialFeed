@@ -40,7 +40,11 @@ class EssentialFeedAPIEndToEndTests: XCTestCase {
     // MARK: - Helpers
 
     private var feedResult: FeedLoader.Result? {
-        let loader = RemoteFeedLoader(client: ephemeralClient(), url: feedTestServerURL)
+        let loader = RemoteLoader(
+            url: feedTestServerURL,
+            client: ephemeralClient(),
+            mapper: FeedItemsMapper.map
+        )
         trackForMemoryLeaks(loader)
 
         let exp = expectation(description: "Wait for load completion")

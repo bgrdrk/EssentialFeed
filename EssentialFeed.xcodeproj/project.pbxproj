@@ -29,7 +29,7 @@
 		C74D369C2897117F008EC45C /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D369B2897117F008EC45C /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */; };
 		C74D369E2897120F008EC45C /* XCTestCase+FailableInsertFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D369D2897120F008EC45C /* XCTestCase+FailableInsertFeedStoreSpecs.swift */; };
 		C74D36A02897129B008EC45C /* XCTestCase+FailableDeleteFeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D369F2897129B008EC45C /* XCTestCase+FailableDeleteFeedStoreSpecs.swift */; };
-		C750181828E437FF00344B2C /* LoadImageCommentsFromRemoteUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750181728E437FF00344B2C /* LoadImageCommentsFromRemoteUseCaseTests.swift */; };
+		C750181828E437FF00344B2C /* ImageCommentsMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750181728E437FF00344B2C /* ImageCommentsMapperTests.swift */; };
 		C750181A28E4384A00344B2C /* RemoteImageCommentsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750181928E4384A00344B2C /* RemoteImageCommentsLoader.swift */; };
 		C750181C28E4386E00344B2C /* ImageCommentsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750181B28E4386E00344B2C /* ImageCommentsMapper.swift */; };
 		C750182028E43D7500344B2C /* ImageComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C750181F28E43D7500344B2C /* ImageComment.swift */; };
@@ -174,7 +174,7 @@
 		C74D369D2897120F008EC45C /* XCTestCase+FailableInsertFeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableInsertFeedStoreSpecs.swift"; sourceTree = "<group>"; };
 		C74D369F2897129B008EC45C /* XCTestCase+FailableDeleteFeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableDeleteFeedStoreSpecs.swift"; sourceTree = "<group>"; };
 		C74EE05F289BF35C0056F416 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C750181728E437FF00344B2C /* LoadImageCommentsFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageCommentsFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
+		C750181728E437FF00344B2C /* ImageCommentsMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsMapperTests.swift; sourceTree = "<group>"; };
 		C750181928E4384A00344B2C /* RemoteImageCommentsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageCommentsLoader.swift; sourceTree = "<group>"; };
 		C750181B28E4386E00344B2C /* ImageCommentsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCommentsMapper.swift; sourceTree = "<group>"; };
 		C750181F28E43D7500344B2C /* ImageComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageComment.swift; sourceTree = "<group>"; };
@@ -429,7 +429,7 @@
 		C750182728E4424400344B2C /* Image Comments API */ = {
 			isa = PBXGroup;
 			children = (
-				C750181728E437FF00344B2C /* LoadImageCommentsFromRemoteUseCaseTests.swift */,
+				C750181728E437FF00344B2C /* ImageCommentsMapperTests.swift */,
 			);
 			path = "Image Comments API";
 			sourceTree = "<group>";
@@ -1027,7 +1027,7 @@
 				C738075E28D9930400947273 /* FeedImageDataStoreSpy.swift in Sources */,
 				C773138B28153CF700C3D612 /* CacheFeedUseCaseTests.swift in Sources */,
 				C7907FBD28CE087300D7CF97 /* LoadFeedImageDataFromCacheUseCaseTests.swift in Sources */,
-				C750181828E437FF00344B2C /* LoadImageCommentsFromRemoteUseCaseTests.swift in Sources */,
+				C750181828E437FF00344B2C /* ImageCommentsMapperTests.swift in Sources */,
 				C76B956A28899AFA006E8982 /* LoadFeedFromCacheUseCaseTests.swift in Sources */,
 				C7A623E528970D6200412906 /* FeedStoreSpecs.swift in Sources */,
 				C7A6009028971EB700394BD2 /* CoreDataFeedStoreTests.swift in Sources */,

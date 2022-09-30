@@ -2,12 +2,12 @@ import Foundation
 import EssentialFeed
 import EssentialFeediOS
 
-final class FeedImageDataLoaderPresentationAdapter<View: FeedImageView, Image>: FeedImageCellControllerDelegate where View.Image == Image {
+final class FeedImageDataLoaderPresentationAdapter<View: ResourceView>: FeedImageCellControllerDelegate {
     private let model: FeedImage
     private let imageLoader: FeedImageDataLoader
     private var task: FeedImageDataLoaderTask?
 
-    var presenter: LoadResourcePresenter<Data, WeakRefVirtualProxy<FeedImageCellController>>?
+    var presenter: LoadResourcePresenter<Data, View>?
 
     init(model: FeedImage, imageLoader: FeedImageDataLoader) {
         self.model = model

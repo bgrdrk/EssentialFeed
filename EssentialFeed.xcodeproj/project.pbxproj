@@ -365,12 +365,20 @@
 			path = "Image Comments Presentation";
 			sourceTree = "<group>";
 		};
-		C743705928E2C54600A0FCD6 /* EssentialFeediOSTests */ = {
+		C742A19228E7152F000BAA74 /* Feed UI */ = {
 			isa = PBXGroup;
 			children = (
 				C7A2BFA028E2C90300F3F24E /* snapshots */,
-				C743706228E2C71100A0FCD6 /* Helpers */,
 				C743705A28E2C54600A0FCD6 /* FeedSnapshotTests.swift */,
+			);
+			path = "Feed UI";
+			sourceTree = "<group>";
+		};
+		C743705928E2C54600A0FCD6 /* EssentialFeediOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				C742A19228E7152F000BAA74 /* Feed UI */,
+				C743706228E2C71100A0FCD6 /* Helpers */,
 			);
 			path = EssentialFeediOSTests;
 			sourceTree = "<group>";

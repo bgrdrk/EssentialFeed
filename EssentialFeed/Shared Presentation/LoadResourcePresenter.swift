@@ -6,12 +6,20 @@ public protocol ResourceView {
     func display(_ viewModel: ResourceViewModel)
 }
 
+public protocol ResourceLoadingView {
+    func display(_ viewModel: ResourceLoadingViewModel)
+}
+
+public protocol ResourceErrorView {
+    func display(_ viewModel: ResourceErrorViewModel)
+}
+
 public final class LoadResourcePresenter<Resource, View: ResourceView> {
     public typealias Mapper = (Resource) -> View.ResourceViewModel
     
     private let resourceView: View
-    private let loadingView: FeedLoadingView
-    private let errorView: FeedErrorView
+    private let loadingView: ResourceLoadingView
+    private let errorView: ResourceErrorView
     private let mapper: Mapper
     
     public static var loadError: String {
@@ -24,8 +32,8 @@ public final class LoadResourcePresenter<Resource, View: ResourceView> {
     }
     
     public init(resourceView: View,
-                loadingView: FeedLoadingView,
-                errorView: FeedErrorView,
+                loadingView: ResourceLoadingView,
+                errorView: ResourceErrorView,
                 mapper: @escaping Mapper) {
         self.resourceView = resourceView
         self.loadingView = loadingView
@@ -35,16 +43,16 @@ public final class LoadResourcePresenter<Resource, View: ResourceView> {
     
     public func didStartLoading() {
         errorView.display(.noError)
-        loadingView.display(FeedLoadingViewModel(isLoading: true))
+        loadingView.display(ResourceLoadingViewModel(isLoading: true))
     }
     
     public func didFinishLoading(with resource: Resource) {
         resourceView.display(mapper(resource))
-        loadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(ResourceLoadingViewModel(isLoading: false))
     }
     
     public func didFinishLoading(with error: Error) {
         errorView.display(.error(message: Self.loadError))
-        loadingView.display(FeedLoadingViewModel(isLoading: false))
+        loadingView.display(ResourceLoadingViewModel(isLoading: false))
     }
 }

@@ -2,9 +2,11 @@ import UIKit
 import EssentialFeed
 import EssentialFeediOS
 
-final class FeedViewAdapter: FeedView {
+final class FeedViewAdapter: ResourceView {
     private weak var controller: FeedViewController?
     private let imageLoader: FeedImageDataLoader
+    
+    private typealias ImageDataPresentationAdapter = FeedImageDataLoaderPresentationAdapter<WeakRefVirtualProxy<FeedImageCellController>>
     
     init(controller: FeedViewController?, imageLoader: FeedImageDataLoader) {
         self.controller = controller
@@ -14,15 +16,33 @@ final class FeedViewAdapter: FeedView {
     func display(_ viewModel: FeedViewModel) {
         controller?.display(
             viewModel.feed.map { model in
-                let adapter = FeedImageDataLoaderPresentationAdapter<WeakRefVirtualProxy<FeedImageCellController>, UIImage>(model: model, imageLoader: imageLoader)
-                let view = FeedImageCellController(delegate: adapter)
+                let adapter = ImageDataPresentationAdapter(model: model, imageLoader: imageLoader)
                 
-                adapter.presenter = FeedImagePresenter(
-                    view: WeakRefVirtualProxy(view),
-                    imageTransformer: UIImage.init)
+                let view = FeedImageCellController(
+                    viewModel: FeedImagePresenter.map(model),
+                    delegate: adapter
+                )
+                
+                adapter.presenter = LoadResourcePresenter(
+                    resourceView: WeakRefVirtualProxy(view),
+                    loadingView: WeakRefVirtualProxy(view),
+                    errorView: WeakRefVirtualProxy(view),
+                    mapper: UIImage.tryMake
+                )
                 
                 return view
             }
         )
+    }
+}
+
+extension UIImage {
+    struct InvalidImageData: Error {}
+    
+    static func tryMake(from data: Data) throws -> UIImage {
+        guard let image = UIImage(data: data) else {
+            throw InvalidImageData()
+        }
+        return image
     }
 }

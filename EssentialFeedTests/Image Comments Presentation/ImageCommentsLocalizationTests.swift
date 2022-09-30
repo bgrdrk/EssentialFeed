@@ -1,11 +1,11 @@
 import XCTest
 import EssentialFeed
 
-final class FeedLocalizationTests: XCTestCase {
-
+class ImageCommentsLocalizationTests: XCTestCase {
+    
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
-        let table = "Feed"
-        let bundle = Bundle(for: FeedPresenter.self)
+        let table = "ImageComments"
+        let bundle = Bundle(for: ImageCommentsPresenter.self)
         
         assertLocalizedKeyAndValuesExist(in: bundle, table)
     }

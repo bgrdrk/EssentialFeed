@@ -3,22 +3,22 @@ import EssentialFeediOS
 
 final class FeedLoaderPresentationAdapter: FeedViewControllerDelegate {
     private let feedLoader: FeedLoader
-    var presenter: FeedPresenter?
+    var presenter: LoadResourcePresenter<[FeedImage], FeedViewAdapter>?
 
     init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader
     }
     
     func didRequestFeedRefresh() {
-        presenter?.didStartLoadingFeed()
+        presenter?.didStartLoading()
 
         feedLoader.load { [weak self] result in
             switch result {
             case let .success(feed):
-                self?.presenter?.didFinishLoadingFeed(with: feed)
+                self?.presenter?.didFinishLoading(with: feed)
 
             case let .failure(error):
-                self?.presenter?.didFinishLoadingFeed(with: error)
+                self?.presenter?.didFinishLoading(with: error)
             }
         }
     }

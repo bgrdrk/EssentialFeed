@@ -410,11 +410,19 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		C742A19728E72923000BAA74 /* Shared UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Shared UI";
+			sourceTree = "<group>";
+		};
 		C743705928E2C54600A0FCD6 /* EssentialFeediOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				C742A19228E7152F000BAA74 /* Feed UI */,
 				C743706228E2C71100A0FCD6 /* Helpers */,
+				C742A19228E7152F000BAA74 /* Feed UI */,
+				C742A19728E72923000BAA74 /* Shared UI */,
 			);
 			path = EssentialFeediOSTests;
 			sourceTree = "<group>";

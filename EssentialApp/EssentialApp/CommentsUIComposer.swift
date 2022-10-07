@@ -10,7 +10,7 @@ public final class CommentsUIComposer {
             feedLoader: MainQueueDispatchDecorator(decoratee: commentsLoader)
         )
         
-        let feedController = makeFeedViewController(title: FeedPresenter.title)
+        let feedController = makeFeedViewController(title: ImageCommentsPresenter.title)
         feedController.onRefresh = presentationAdapter.didRequestFeedRefresh
         
         presentationAdapter.presenter = LoadResourcePresenter(

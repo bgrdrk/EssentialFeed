@@ -23,3 +23,26 @@ final class FeedLoaderPresentationAdapter {
         }
     }
 }
+
+final class CommentsPresentationAdapter {
+    private let loader: CommentsLoader
+    var presenter: LoadResourcePresenter<[ImageComment], CommentsViewAdapter>?
+    
+    init(loader: CommentsLoader) {
+        self.loader = loader
+    }
+    
+    func didRequestFeedRefresh() {
+        presenter?.didStartLoading()
+        
+        loader.load { [weak self] result in
+            switch result {
+            case let .success(comments):
+                self?.presenter?.didFinishLoading(with: comments)
+                
+            case let .failure(error):
+                self?.presenter?.didFinishLoading(with: error)
+            }
+        }
+    }
+}

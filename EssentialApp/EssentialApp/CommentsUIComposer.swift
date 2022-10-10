@@ -44,17 +44,3 @@ final class CommentsViewAdapter: ResourceView {
         })
     }
 }
-
-// TODO: Remove this below
-
-private struct FeedImageDataLoaderDummy: FeedImageDataLoader {
-    func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> EssentialFeed.FeedImageDataLoaderTask {
-        FeedImageDataLoaderTaskDummy()
-    }
-    
-    
-}
-
-private struct FeedImageDataLoaderTaskDummy: FeedImageDataLoaderTask {
-    func cancel() {}
-}

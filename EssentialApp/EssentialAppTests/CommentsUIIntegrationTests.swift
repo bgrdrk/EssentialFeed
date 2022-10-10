@@ -124,23 +124,25 @@ class CommentsUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
-    func test_deinit_cancelsRunningRequest() {
+    // TODO: - this needs solution, can't figure out how to cancel it with current setup
+//    func test_deinit_cancelsRunningRequest() {
+//        let (_, loader) = makeSUT()
 //        var cancelCallCount = 0
-//        
+//
 //        var sut: ListViewController?
-//        
+//
 //        autoreleasepool {
-//            sut = CommentsUIComposer.commentsComposedWith(commentsLoader: )
-//            
+//            sut = CommentsUIComposer.commentsComposedWith(commentsLoader: loader)
+//
 //            sut?.loadViewIfNeeded()
 //        }
-//        
+//
 //        XCTAssertEqual(cancelCallCount, 0)
-//        
+//
 //        sut = nil
-//        
+//
 //        XCTAssertEqual(cancelCallCount, 1)
-    }
+//    }
     
     // MARK: - Helpers
     

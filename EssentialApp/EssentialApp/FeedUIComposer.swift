@@ -5,7 +5,12 @@ import EssentialFeediOS
 public final class FeedUIComposer {
     private init() {}
 
-    public static func feedComposedWith(feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> ListViewController {
+    public static func feedComposedWith(
+        feedLoader: FeedLoader,
+        imageLoader: FeedImageDataLoader,
+        selection: @escaping (FeedImage) -> Void = { _ in }
+    ) -> ListViewController {
+        
         let presentationAdapter = FeedLoaderPresentationAdapter(
             feedLoader: MainQueueDispatchDecorator(decoratee: feedLoader)
         )
@@ -16,7 +21,8 @@ public final class FeedUIComposer {
         presentationAdapter.presenter = LoadResourcePresenter(
             resourceView: FeedViewAdapter(
                 controller: feedController,
-                imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)
+                imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader),
+                selection: selection
             ),
             loadingView: WeakRefVirtualProxy(feedController),
             errorView: WeakRefVirtualProxy(feedController),

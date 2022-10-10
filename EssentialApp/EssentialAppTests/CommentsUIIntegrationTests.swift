@@ -134,7 +134,9 @@ class CommentsUIIntegrationTests: XCTestCase {
 //        autoreleasepool {
 //            sut = CommentsUIComposer.commentsComposedWith(commentsLoader: loader)
 //
+//            loader.completeCommentsLoading(with: [makeComment()])
 //            sut?.loadViewIfNeeded()
+//            sut?.simulateFeedImageViewNotVisible(at: 0)
 //        }
 //
 //        XCTAssertEqual(cancelCallCount, 0)

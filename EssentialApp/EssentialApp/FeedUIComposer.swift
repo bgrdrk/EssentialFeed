@@ -8,7 +8,7 @@ public final class FeedUIComposer {
     public static func feedComposedWith(
         feedLoader: FeedLoader,
         imageLoader: FeedImageDataLoader,
-        selection: @escaping (FeedImage) -> Void = { _ in }
+        selection: @escaping (FeedImage) -> Void
     ) -> ListViewController {
         
         let presentationAdapter = FeedLoaderPresentationAdapter(

@@ -61,7 +61,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func configureWindow() {
-//        let remoteURL = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5db4155a4fbade21d17ecd28/1572083034355/essential_app_feed.json")!
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
@@ -71,7 +70,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func showComments(for image: FeedImage) {
-        let url = baseURL.appendingPathComponent("/v1/image/\(image.id)/comments")
+        let url = ImageCommentsEndpoint.get(image.id).url(baseURL: baseURL)
         let comments = CommentsUIComposer.commentsComposedWith(
             commentsLoader: makeRemoteCommentsLoader(url: url)
         )
@@ -83,8 +82,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader {
-        let remoteURL = baseURL.appendingPathComponent("/v1/feed")
-        return RemoteLoader(url: remoteURL, client: httpClient, mapper: FeedItemsMapper.map)
+        let url = FeedEndpoint.get.url(baseURL: baseURL)
+        return RemoteLoader(url: url, client: httpClient, mapper: FeedItemsMapper.map)
     }
 }
 

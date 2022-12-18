@@ -53,12 +53,12 @@ extension LocalFeedLoader: FeedLoader {
             
             switch result {
             case .success(.none):
-                completion(.success([]))
+                completion(.success(.init(items: [])))
             case .success(let .some(cachedFeed)):
                 if FeedCachePolicy.validate(cachedFeed.timestamp, against: self.currentDate()) {
-                    completion(.success(cachedFeed.feed.toModels))
+                    completion(.success(.init(items: cachedFeed.feed.toModels)))
                 } else {
-                    completion(.success([]))
+                    completion(.success(.init(items: [])))
                 }
             case .failure(let error):
                 completion(.failure(error))

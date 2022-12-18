@@ -29,7 +29,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
     func test_load_deliversNoImagesOnEmptyCache() {
         let (sut, store) = makeSUT()
         
-        expect(sut, toCompleteWith: .success([]), when: {
+        expect(sut, toCompleteWith: .success(.init(items: [])), when: {
             store.completeRetrievalWithEmptyCache()
         })
     }
@@ -41,7 +41,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
-        expect(sut, toCompleteWith: .success(feed.models), when: {
+        expect(sut, toCompleteWith: .success(.init(items: feed.models)), when: {
             store.completeRetrieval(with: feed.local, timestamp: nonExpiredTimestamp)
         })
     }
@@ -53,7 +53,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
-        expect(sut, toCompleteWith: .success([]), when: {
+        expect(sut, toCompleteWith: .success(.init(items: [])), when: {
             store.completeRetrieval(with: feed.local, timestamp: expirationTimestamp)
         })
     }
@@ -65,7 +65,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
 
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
 
-        expect(sut, toCompleteWith: .success([]), when: {
+        expect(sut, toCompleteWith: .success(.init(items: [])), when: {
             store.completeRetrieval(with: feed.local, timestamp: expiredTimestamp)
         })
     }
@@ -163,7 +163,7 @@ final class LoadFeedFromCacheUseCaseTests: XCTestCase {
         sut.load { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (.success(receivedImages), .success(expectedImages)):
-                XCTAssertEqual(receivedImages, expectedImages, file: file, line: line)
+                XCTAssertEqual(receivedImages.items, expectedImages.items, file: file, line: line)
                 
             case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
                 XCTAssertEqual(receivedError, expectedError, file: file, line: line)

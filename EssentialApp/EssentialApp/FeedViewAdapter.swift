@@ -44,11 +44,21 @@ final class FeedViewAdapter: ResourceView {
             return CellController(id: model, view)
         }
         
-        let loadMore = LoadMoreCellController {
-            viewModel.loadMore?({ _ in })
+        guard viewModel.loadMore != nil else {
+            controller?.display(feed)
+            return
         }
         
-        let loadMoreSection = [CellController(id: UUID(), loadMore)]
+        let loadMoreAdapter = LoadMorePresentationAdapter<WeakRefVirtualProxyExtra<FeedViewAdapter>>(model: viewModel)
+        let loadMoreController = LoadMoreCellController(callback: loadMoreAdapter.didRequestImage)
+        
+        loadMoreAdapter.presenter = LoadResourcePresenter(
+            resourceView: WeakRefVirtualProxyExtra(self),
+            loadingView: WeakRefVirtualProxy(loadMoreController),
+            errorView: WeakRefVirtualProxy(loadMoreController)
+        )
+        
+        let loadMoreSection = [CellController(id: UUID(), loadMoreController)]
         
         controller?.display(feed, loadMoreSection)
     }

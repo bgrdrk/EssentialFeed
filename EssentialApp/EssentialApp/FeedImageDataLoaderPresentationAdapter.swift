@@ -33,3 +33,31 @@ final class FeedImageDataLoaderPresentationAdapter<View: ResourceView>: FeedImag
         task?.cancel()
     }
 }
+
+final class LoadMorePresentationAdapter<View: ResourceView>: FeedImageCellControllerDelegate {
+    private let model: Paginated<FeedImage>
+    private var task: FeedImageDataLoaderTask?
+    
+    var presenter: LoadResourcePresenter<Paginated<FeedImage>, View>?
+    
+    init(model: Paginated<FeedImage>) {
+        self.model = model
+    }
+    
+    func didRequestImage() {
+        presenter?.didStartLoading()
+        
+        model.loadMore? { [weak self] result in
+            switch result {
+            case let .success(data):
+                self?.presenter?.didFinishLoading(with: data)
+            case let .failure(error):
+                self?.presenter?.didFinishLoading(with: error)
+            }
+        }
+    }
+    
+    func didCancelImageRequest() {
+        task?.cancel()
+    }
+}

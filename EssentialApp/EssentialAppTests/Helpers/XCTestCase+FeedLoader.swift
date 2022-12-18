@@ -13,7 +13,7 @@ extension FeedLoaderTestCase {
         sut.load { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (.success(receivedFeed), .success(expectedFeed)):
-                XCTAssertEqual(receivedFeed, expectedFeed, file: file, line: line)
+                XCTAssertEqual(receivedFeed.items, expectedFeed.items, file: file, line: line)
 
             case (.failure, .failure):
                 break

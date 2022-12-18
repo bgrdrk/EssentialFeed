@@ -3,7 +3,7 @@ import EssentialFeediOS
 
 final class FeedLoaderPresentationAdapter {
     private let feedLoader: FeedLoader
-    var presenter: LoadResourcePresenter<[FeedImage], FeedViewAdapter>?
+    var presenter: LoadResourcePresenter<Paginated<FeedImage>, FeedViewAdapter>?
 
     init(feedLoader: FeedLoader) {
         self.feedLoader = feedLoader

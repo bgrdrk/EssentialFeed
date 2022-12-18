@@ -87,5 +87,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
-extension RemoteLoader: FeedLoader where Resource == [FeedImage] {}
+extension RemoteLoader: FeedLoader where Resource == Paginated<FeedImage> {}
 extension RemoteLoader: CommentsLoader where Resource == [ImageComment] {}

@@ -27,7 +27,7 @@ class FeedItemsMapperTests: XCTestCase {
         
         let result = try FeedItemsMapper.map(emptyListJSON, from: HTTPURLResponse(statusCode: 200))
         
-        XCTAssertEqual(result, [])
+        XCTAssertEqual(result.items, [])
     }
     
     func test_map_deliversItemsOn200HTTPResponseWithJSONItems() throws {
@@ -45,7 +45,7 @@ class FeedItemsMapperTests: XCTestCase {
         
         let result = try FeedItemsMapper.map(json, from: HTTPURLResponse(statusCode: 200))
         
-        XCTAssertEqual(result, [item1.model, item2.model])
+        XCTAssertEqual(result.items, [item1.model, item2.model])
     }
     
     // MARK: - Helpers

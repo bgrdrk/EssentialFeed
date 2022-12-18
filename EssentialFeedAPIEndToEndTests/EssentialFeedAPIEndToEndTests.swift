@@ -6,15 +6,15 @@ class EssentialFeedAPIEndToEndTests: XCTestCase {
     func test_endToEndTestServerGETFeedResult_matchesFixedTestAccountData() {
         switch feedResult {
         case let .success(imageFeed)?:
-            XCTAssertEqual(imageFeed.count, 8, "Expected 8 images in the test account image feed")
-            XCTAssertEqual(imageFeed[0], expectedImage(at: 0))
-            XCTAssertEqual(imageFeed[1], expectedImage(at: 1))
-            XCTAssertEqual(imageFeed[2], expectedImage(at: 2))
-            XCTAssertEqual(imageFeed[3], expectedImage(at: 3))
-            XCTAssertEqual(imageFeed[4], expectedImage(at: 4))
-            XCTAssertEqual(imageFeed[5], expectedImage(at: 5))
-            XCTAssertEqual(imageFeed[6], expectedImage(at: 6))
-            XCTAssertEqual(imageFeed[7], expectedImage(at: 7))
+            XCTAssertEqual(imageFeed.items.count, 8, "Expected 8 images in the test account image feed")
+            XCTAssertEqual(imageFeed.items[0], expectedImage(at: 0))
+            XCTAssertEqual(imageFeed.items[1], expectedImage(at: 1))
+            XCTAssertEqual(imageFeed.items[2], expectedImage(at: 2))
+            XCTAssertEqual(imageFeed.items[3], expectedImage(at: 3))
+            XCTAssertEqual(imageFeed.items[4], expectedImage(at: 4))
+            XCTAssertEqual(imageFeed.items[5], expectedImage(at: 5))
+            XCTAssertEqual(imageFeed.items[6], expectedImage(at: 6))
+            XCTAssertEqual(imageFeed.items[7], expectedImage(at: 7))
 
         case let .failure(error)?:
             XCTFail("Expected successful feed result, got \(error) instead")

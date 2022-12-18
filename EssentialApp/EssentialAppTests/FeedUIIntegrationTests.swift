@@ -409,7 +409,22 @@ class FeedUIIntegrationTests: XCTestCase {
             loader.completeLoadMore()
             exp.fulfill()
         }
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: 2.0)
+    }
+    
+    func test_loadMoreCompletion_rendersErrorMessageOnError() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading()
+        
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(sut.loadMoreFeedErrorMessage, nil)
+        
+        loader.completeLoadMoreWithError()
+        XCTAssertEqual(sut.loadMoreFeedErrorMessage, loadError)
+        
+        sut.simulateLoadMoreFeedAction()
+        XCTAssertEqual(sut.loadMoreFeedErrorMessage, nil)
     }
 
     // MARK: - Helpers

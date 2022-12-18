@@ -76,7 +76,6 @@
 		C766DF9928C8683B00053F06 /* FeedPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766DF9828C8683B00053F06 /* FeedPresenterTests.swift */; };
 		C766DFA328C8727500053F06 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766DFA228C8727500053F06 /* FeedPresenter.swift */; };
 		C766DFA428C8733F00053F06 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = C766DF9E28C870E900053F06 /* Feed.strings */; };
-		C766DFA628C8737500053F06 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766DFA528C8737500053F06 /* FeedViewModel.swift */; };
 		C766DFA828C873BD00053F06 /* ResourceLoadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766DFA728C873BD00053F06 /* ResourceLoadingViewModel.swift */; };
 		C766DFAA28C873D400053F06 /* ResourceErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766DFA928C873D400053F06 /* ResourceErrorViewModel.swift */; };
 		C766DFAC28C876F000053F06 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C766DFAB28C876F000053F06 /* ErrorView.swift */; };
@@ -265,7 +264,6 @@
 		C766DF9F28C870ED00053F06 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Feed.strings"; sourceTree = "<group>"; };
 		C766DFA028C870EF00053F06 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Feed.strings; sourceTree = "<group>"; };
 		C766DFA228C8727500053F06 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
-		C766DFA528C8737500053F06 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		C766DFA728C873BD00053F06 /* ResourceLoadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLoadingViewModel.swift; sourceTree = "<group>"; };
 		C766DFA928C873D400053F06 /* ResourceErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceErrorViewModel.swift; sourceTree = "<group>"; };
 		C766DFAB28C876F000053F06 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -718,7 +716,6 @@
 				C75C7A6928C9C70900328961 /* FeedImagePresenter.swift */,
 				C75C7A6B28C9C77200328961 /* FeedImageViewModel.swift */,
 				C766DFA228C8727500053F06 /* FeedPresenter.swift */,
-				C766DFA528C8737500053F06 /* FeedViewModel.swift */,
 			);
 			path = "Feed Presentation";
 			sourceTree = "<group>";
@@ -1246,7 +1243,6 @@
 			files = (
 				C742A18828E6EE91000BAA74 /* ImageCommentsPresenter.swift in Sources */,
 				C750182028E43D7500344B2C /* ImageComment.swift in Sources */,
-				C766DFA628C8737500053F06 /* FeedViewModel.swift in Sources */,
 				C7A6009A2897A82800394BD2 /* CoreDataHelpers.swift in Sources */,
 				C7370CD128F541E800B4B5A2 /* FeedEndpoint.swift in Sources */,
 				C7387886280EE89900327C38 /* FeedItemsMapper.swift in Sources */,

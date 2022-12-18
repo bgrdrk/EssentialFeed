@@ -9,12 +9,15 @@ extension FeedUIIntegrationTests {
         // MARK: - FeedLoader
         
         private var feedRequests = [(FeedLoader.Result) -> Void]()
+        private var loadMoreRequests = [(FeedLoader.Result) -> Void]()
         
         var loadFeedCallCount: Int {
             return feedRequests.count
         }
         
-        private(set) var loadMoreCallCount = 0
+        var loadMoreCallCount: Int {
+            return loadMoreRequests.count
+        }
         
         func load(completion: @escaping (FeedLoader.Result) -> Void) {
             feedRequests.append(completion)
@@ -23,10 +26,24 @@ extension FeedUIIntegrationTests {
         func completeFeedLoading(with feed: [FeedImage] = [], at index: Int = 0) {
             feedRequests[index](.success(.init(
                 items: feed,
-                loadMore: { [weak self] _ in
-                    self?.loadMoreCallCount += 1
+                loadMore: { [weak self] result in
+                    self?.loadMoreRequests.append(result)
                 }
             )))
+        }
+        
+        func completeLoadMore(with feed: [FeedImage] = [], lastPage: Bool = false, at index: Int = 0) {
+            loadMoreRequests[index](.success(.init(
+                items: feed,
+                loadMore: lastPage ? nil : { [weak self] result in
+                    self?.loadMoreRequests.append(result)
+                }
+            )))
+        }
+        
+        func completeLoadMoreWithError(at index: Int = 0) {
+            let error = NSError(domain: "an error", code: 0)
+            loadMoreRequests[index](.failure(error))
         }
         
         func completeFeedLoadingWithError(at index: Int = 0) {

@@ -82,7 +82,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func makeRemoteFeedLoaderWithLocalFallback() -> FeedLoader {
-        let url = FeedEndpoint.get.url(baseURL: baseURL)
+        let url = FeedEndpoint.get().url(baseURL: baseURL)
         return RemoteLoader(url: url, client: httpClient, mapper: FeedItemsMapper.map)
     }
 }

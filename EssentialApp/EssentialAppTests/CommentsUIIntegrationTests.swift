@@ -1,5 +1,6 @@
 import XCTest
 import UIKit
+import Combine
 import EssentialApp
 import EssentialFeed
 import EssentialFeediOS
@@ -124,33 +125,34 @@ class CommentsUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.errorMessage, nil)
     }
     
-    // TODO: - this needs solution, can't figure out how to cancel it with current setup
-//    func test_deinit_cancelsRunningRequest() {
-//        let (_, loader) = makeSUT()
-//        var cancelCallCount = 0
-//
-//        var sut: ListViewController?
-//
-//        autoreleasepool {
-//            sut = CommentsUIComposer.commentsComposedWith(commentsLoader: loader)
-//
-//            loader.completeCommentsLoading(with: [makeComment()])
-//            sut?.loadViewIfNeeded()
-//            sut?.simulateFeedImageViewNotVisible(at: 0)
-//        }
-//
-//        XCTAssertEqual(cancelCallCount, 0)
-//
-//        sut = nil
-//
-//        XCTAssertEqual(cancelCallCount, 1)
-//    }
+    func test_deinit_cancelsRunningRequest() {
+        var cancelCallCount = 0
+        
+        var sut: ListViewController?
+        
+        autoreleasepool {
+            sut = CommentsUIComposer.commentsComposedWith(commentsLoader: {
+                PassthroughSubject<[ImageComment], Error>()
+                    .handleEvents(receiveCancel: {
+                        cancelCallCount += 1
+                    }).eraseToAnyPublisher()
+            })
+            
+            sut?.loadViewIfNeeded()
+        }
+        
+        XCTAssertEqual(cancelCallCount, 0)
+        
+        sut = nil
+        
+        XCTAssertEqual(cancelCallCount, 1)
+    }
     
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: ListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = CommentsUIComposer.commentsComposedWith(commentsLoader: loader)
+        let sut = CommentsUIComposer.commentsComposedWith(commentsLoader: loader.loadPublisher)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
@@ -172,25 +174,28 @@ class CommentsUIIntegrationTests: XCTestCase {
         }
     }
     
-    private class LoaderSpy: CommentsLoader {
+    private class LoaderSpy {
         
-        private var requests = [(CommentsLoader.Result) -> Void]()
+        private var requests = [PassthroughSubject<[ImageComment], Error>]()
         
         var loadCommentsCallCount: Int {
             return requests.count
         }
         
-        func load(completion: @escaping (CommentsLoader.Result) -> Void) {
-            requests.append(completion)
+        func loadPublisher() -> AnyPublisher<[ImageComment], Error> {
+            let publisher = PassthroughSubject<[ImageComment], Error>()
+            requests.append(publisher)
+            return publisher.eraseToAnyPublisher()
         }
         
-        func completeCommentsLoading(with feed: [ImageComment] = [], at index: Int = 0) {
-            requests[index](.success(feed))
+        func completeCommentsLoading(with comments: [ImageComment] = [], at index: Int = 0) {
+            requests[index].send(comments)
+            requests[index].send(completion: .finished)
         }
         
         func completeCommentsLoadingWithError(at index: Int = 0) {
             let error = NSError(domain: "an error", code: 0)
-            requests[index](.failure(error))
+            requests[index].send(completion: .failure(error))
         }
     }
 }

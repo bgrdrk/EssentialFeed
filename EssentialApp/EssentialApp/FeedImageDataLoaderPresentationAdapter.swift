@@ -1,15 +1,16 @@
+import Combine
 import Foundation
 import EssentialFeed
 import EssentialFeediOS
 
 final class FeedImageDataLoaderPresentationAdapter<View: ResourceView>: FeedImageCellControllerDelegate {
     private let model: FeedImage
-    private let imageLoader: FeedImageDataLoader
-    private var task: FeedImageDataLoaderTask?
+    private let imageLoader: (URL) -> FeedImageDataLoader.Publisher
+    private var cancellable: Cancellable?
 
     var presenter: LoadResourcePresenter<Data, View>?
 
-    init(model: FeedImage, imageLoader: FeedImageDataLoader) {
+    init(model: FeedImage, imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher) {
         self.model = model
         self.imageLoader = imageLoader
     }
@@ -18,19 +19,26 @@ final class FeedImageDataLoaderPresentationAdapter<View: ResourceView>: FeedImag
         presenter?.didStartLoading()
 
         let model = self.model
-        task = imageLoader.loadImageData(from: model.url) { [weak self] result in
-            switch result {
-            case let .success(data):
-                self?.presenter?.didFinishLoading(with: data)
-
-            case let .failure(error):
-                self?.presenter?.didFinishLoading(with: error)
-            }
-        }
+        cancellable = imageLoader(model.url)
+            .dispatchOnMainQueue()
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case let .failure(error):
+                        self?.presenter?.didFinishLoading(with: error)
+//                        self?.presenter?.didFinishLoadingImageData(with: error, for: model)
+                    }
+                },
+                receiveValue: { [weak self] data in
+                    self?.presenter?.didFinishLoading(with: data)
+                }
+            )
     }
 
     func didCancelImageRequest() {
-        task?.cancel()
+        cancellable?.cancel()
     }
 }
 

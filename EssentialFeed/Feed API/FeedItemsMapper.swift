@@ -22,12 +22,12 @@ public final class FeedItemsMapper {
         case invalidData
     }
 
-    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> Paginated<FeedImage> {
+    public static func map(_ data: Data, from response: HTTPURLResponse) throws -> [FeedImage] {
         guard response.isOK, let root = root(from: data) else {
             throw Error.invalidData
         }
 
-        return .init(items: root.images)
+        return root.images
     }
 
     private static func root(from data: Data) -> Root? {

@@ -364,11 +364,11 @@ class FeedUIIntegrationTests: XCTestCase {
         loader.completeLoadMore(lastPage: false, at: 0)
         sut.simulateLoadMoreFeedAction()
         XCTAssertEqual(loader.loadMoreCallCount, 2, "Expected request after load more completed with more pages")
-
+        
         loader.completeLoadMoreWithError(at: 1)
         sut.simulateLoadMoreFeedAction()
         XCTAssertEqual(loader.loadMoreCallCount, 3, "Expected request after load more failure")
-
+        
         loader.completeLoadMore(lastPage: true, at: 2)
         sut.simulateLoadMoreFeedAction()
         XCTAssertEqual(loader.loadMoreCallCount, 3, "Expected no request after loading all pages")
@@ -387,7 +387,7 @@ class FeedUIIntegrationTests: XCTestCase {
         XCTAssertTrue(sut.isShowingLoadMoreFeedIndicator, "Expected loading indicator on load more action")
         
         loader.completeLoadMore(at: 0)
-//        XCTAssertFalse(sut.isShowingLoadMoreFeedIndicator, "Expected no loading indicator once user initiated loading completes successfully")
+        XCTAssertFalse(sut.isShowingLoadMoreFeedIndicator, "Expected no loading indicator once user initiated loading completes successfully")
         
         sut.simulateLoadMoreFeedAction()
         XCTAssertTrue(sut.isShowingLoadMoreFeedIndicator, "Expected loading indicator on second load more action")
@@ -450,8 +450,8 @@ class FeedUIIntegrationTests: XCTestCase {
     ) -> (sut: ListViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
         let sut = FeedUIComposer.feedComposedWith(
-            feedLoader: loader,
-            imageLoader: loader,
+            feedLoader: loader.loadPublisher,
+            imageLoader: loader.loadImageDataPublisher,
             selection: selection
         )
         trackForMemoryLeaks(loader, file: file, line: line)

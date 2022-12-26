@@ -1,17 +1,18 @@
 import UIKit
+import Combine
 import EssentialFeed
 import EssentialFeediOS
 
 public final class CommentsUIComposer {
     private init() {}
     
-    public static func commentsComposedWith(commentsLoader: CommentsLoader) -> ListViewController {
-        let presentationAdapter = CommentsPresentationAdapter(
-            loader: MainQueueDispatchDecorator(decoratee: commentsLoader)
-        )
+    private typealias CommentsPresentationAdapter = LoadResourcePresentationAdapter<[ImageComment], CommentsViewAdapter>
+    
+    public static func commentsComposedWith(commentsLoader: @escaping () -> AnyPublisher<[ImageComment], Error>) -> ListViewController {
+        let presentationAdapter = CommentsPresentationAdapter(loader: commentsLoader)
         
         let commentsController = makeCommentsViewController(title: ImageCommentsPresenter.title)
-        commentsController.onRefresh = presentationAdapter.didRequestFeedRefresh
+        commentsController.onRefresh = presentationAdapter.loadResource
         
         presentationAdapter.presenter = LoadResourcePresenter(
             resourceView: CommentsViewAdapter(controller: commentsController),

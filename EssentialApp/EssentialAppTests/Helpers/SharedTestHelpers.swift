@@ -13,10 +13,12 @@ var anyURL: URL {
     URL(string: "http://a-url.com")!
 }
 
-var uniqueFeed: [FeedImage] {
-    [
-        FeedImage(id: UUID(), description: "any", location: "any", url: anyURL),
-    ]
+var uniqueFeed: Paginated<FeedImage> {
+    .init(items:
+            [
+                FeedImage(id: UUID(), description: "any", location: "any", url: anyURL),
+            ]
+    )
 }
 
 private class DummyView: ResourceView {

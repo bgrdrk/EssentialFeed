@@ -1,32 +1,33 @@
 import UIKit
+import Combine
 import EssentialFeed
 import EssentialFeediOS
 
 public final class FeedUIComposer {
     private init() {}
+    
+    private typealias FeedPresentationAdapter = LoadResourcePresentationAdapter<Paginated<FeedImage>, FeedViewAdapter>
 
     public static func feedComposedWith(
-        feedLoader: FeedLoader,
-        imageLoader: FeedImageDataLoader,
+        feedLoader: @escaping () -> AnyPublisher<Paginated<FeedImage>, Error>,
+        imageLoader: @escaping (URL) -> FeedImageDataLoader.Publisher,
         selection: @escaping (FeedImage) -> Void
     ) -> ListViewController {
         
-        let presentationAdapter = FeedLoaderPresentationAdapter(
-            feedLoader: MainQueueDispatchDecorator(decoratee: feedLoader)
-        )
+        let presentationAdapter = FeedPresentationAdapter(loader: feedLoader)
         
         let feedController = makeFeedViewController(title: FeedPresenter.title)
-        feedController.onRefresh = presentationAdapter.didRequestFeedRefresh
+        feedController.onRefresh = presentationAdapter.loadResource
         
         presentationAdapter.presenter = LoadResourcePresenter(
             resourceView: FeedViewAdapter(
                 controller: feedController,
-                imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader),
+                imageLoader: imageLoader,
                 selection: selection
             ),
             loadingView: WeakRefVirtualProxy(feedController),
             errorView: WeakRefVirtualProxy(feedController),
-            mapper: FeedPresenter.map
+            mapper: { $0 }
         )
         return feedController
     }

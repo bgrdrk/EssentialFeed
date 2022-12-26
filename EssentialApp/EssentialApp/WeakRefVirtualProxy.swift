@@ -26,3 +26,17 @@ extension WeakRefVirtualProxy: ResourceErrorView where T: ResourceErrorView {
         object?.display(viewModel)
     }
 }
+
+final class WeakRefVirtualProxyExtra<T: AnyObject> {
+    private weak var object: T?
+    
+    init(_ object: T) {
+        self.object = object
+    }
+}
+
+extension WeakRefVirtualProxyExtra: ResourceView where T: ResourceView, T.ResourceViewModel == Paginated<FeedImage> {
+    func display(_ model: Paginated<FeedImage>) {
+        object?.display(model)
+    }
+}

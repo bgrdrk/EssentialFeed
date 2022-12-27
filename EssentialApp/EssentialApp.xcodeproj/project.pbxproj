@@ -18,6 +18,7 @@
 		C72BDE7928DAF6B400B6FEC8 /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C72BDE7528DAF6B400B6FEC8 /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C72BDE8528DB23EF00B6FEC8 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72BDE8428DB23EF00B6FEC8 /* XCTestCase+MemoryLeakTracking.swift */; };
 		C72BDE8728DB242500B6FEC8 /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72BDE8628DB242500B6FEC8 /* SharedTestHelpers.swift */; };
+		C73193D92959D5EA00C3D22C /* NullStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73193D82959D5EA00C3D22C /* NullStore.swift */; };
 		C7405E1828EFEE6D0043CB1C /* CommentsUIIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7405E1728EFEE6D0043CB1C /* CommentsUIIntegrationTests.swift */; };
 		C7405E1A28EFEEDB0043CB1C /* CommentsUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7405E1928EFEEDB0043CB1C /* CommentsUIComposer.swift */; };
 		C7A2BFAC28E2DC5F00F3F24E /* UIView+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A2BFAB28E2DC5F00F3F24E /* UIView+TestHelpers.swift */; };
@@ -80,6 +81,7 @@
 		C72BDE7528DAF6B400B6FEC8 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C72BDE8428DB23EF00B6FEC8 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		C72BDE8628DB242500B6FEC8 /* SharedTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		C73193D82959D5EA00C3D22C /* NullStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NullStore.swift; sourceTree = "<group>"; };
 		C7405E1728EFEE6D0043CB1C /* CommentsUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsUIIntegrationTests.swift; sourceTree = "<group>"; };
 		C7405E1928EFEEDB0043CB1C /* CommentsUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsUIComposer.swift; sourceTree = "<group>"; };
 		C7A2BFAB28E2DC5F00F3F24E /* UIView+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -155,10 +157,11 @@
 				C72BDE4328DAF02500B6FEC8 /* AppDelegate.swift */,
 				C72BDE4528DAF02500B6FEC8 /* SceneDelegate.swift */,
 				C72BDE4728DAF02500B6FEC8 /* ViewController.swift */,
+				C7B6EAD729572A1200B5D78F /* LoadResourcePresentationAdapter.swift */,
+				C73193D82959D5EA00C3D22C /* NullStore.swift */,
 				C72BDE4C28DAF02500B6FEC8 /* Assets.xcassets */,
 				C72BDE4E28DAF02500B6FEC8 /* LaunchScreen.storyboard */,
 				C72BDE5128DAF02500B6FEC8 /* Info.plist */,
-				C7B6EAD729572A1200B5D78F /* LoadResourcePresentationAdapter.swift */,
 			);
 			path = EssentialApp;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				C72BDE4628DAF02500B6FEC8 /* SceneDelegate.swift in Sources */,
 				C7405E1A28EFEEDB0043CB1C /* CommentsUIComposer.swift in Sources */,
 				C7F9773C28DEF06400C87F62 /* WeakRefVirtualProxy.swift in Sources */,
+				C73193D92959D5EA00C3D22C /* NullStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

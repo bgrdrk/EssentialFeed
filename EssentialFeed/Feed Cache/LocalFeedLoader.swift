@@ -18,23 +18,10 @@ public final class LocalFeedLoader {
 }
 
 extension LocalFeedLoader: FeedCache {
-    public typealias SaveResult = FeedCache.Result
-    // we need to notify clients of the save command when error occured and operation stopped
-    // since operations are asynchronous we can pass a block/closure where..
-    // we receive an error if anything went wrong
-
-    public func save(_ feed: [FeedImage], completion: @escaping (SaveResult) -> Void) {
-        completion(SaveResult {
-            try store.deleteCachedFeed()
-            try store.insert(feed.toLocal, timestamp: currentDate())
-        })
-    }
     
-    private func cache(_ feed: [FeedImage], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(feed.toLocal, timestamp: currentDate(), completion: { [weak self] insertionResult in
-            guard self != nil else { return }
-            completion(insertionResult)
-        })
+    public func save(_ feed: [FeedImage]) throws {
+        try store.deleteCachedFeed()
+        try store.insert(feed.toLocal, timestamp: currentDate())
     }
 }
 
